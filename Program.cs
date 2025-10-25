@@ -12,6 +12,7 @@
     Console.Write(" Введите второе число: ");
     num2 = Convert.ToDouble(Console.ReadLine());
     double result = 0;
+    Console.WriteLine();
     switch (operation)
     {
         case "+":
@@ -24,20 +25,24 @@
             result = num1 * num2;
             break;
         case "/":
+
             if (num2 != 0)
             {
                 result = num1 / num2;
             }
+
             else
             {
                 Console.WriteLine("Ошибка: деление на ноль невозможно.");
                 return;
             }
             break;
+
         default:
             Console.WriteLine("Ошибка: неверная операция.");
             return;
     }
+    
     Console.WriteLine($"Результат: {result}");
     Console.ReadKey();
 }
