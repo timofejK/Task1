@@ -3,46 +3,74 @@
     double num1 = 0;
     double num2 = 0;
     string operation;
+    bool exit;
 
-    Console.WriteLine(" Консольный калькулятор ");
-    Console.Write(" Введите первое число: ");
-    num1 = Convert.ToDouble(Console.ReadLine());
-    Console.Write(" Введите нужный знак исчисления (+, -, *, /): ");
-    operation = Console.ReadLine();
-    Console.Write(" Введите второе число: ");
-    num2 = Convert.ToDouble(Console.ReadLine());
-    double result = 0;
-    Console.WriteLine();
-    switch (operation)
-    {
-        case "+":
-            result = num1 + num2;
-            break;
-        case "-":
-            result = num1 - num2;
-            break;
-        case "*":
-            result = num1 * num2;
-            break;
-        case "/":
+ do
+ {
+   Console.WriteLine("Консольный калькулятор");
+   Console.Write("Введите первое число: ");
+   while (!double.TryParse(Console.ReadLine(), out num1))
+   {
+    Console.WriteLine("Ошибка: некорректный ввод. Пожалуйста, введите число.");
+    Console.Write("Введите первое число: ");
+   }
 
-            if (num2 != 0)
-            {
-                result = num1 / num2;
-            }
+        
+  Console.Write("Введите знак исчисления (+, -, *, /): ");
+  operation = Console.ReadLine();
 
-            else
-            {
-                Console.WriteLine("Ошибка: деление на ноль невозможно.");
-                return;
-            }
-            break;
+       
+  Console.Write("Введите второе число: ");
+  while (!double.TryParse(Console.ReadLine(), out num2))
+  {
+   Console.WriteLine("Ошибка: некорректный ввод. Пожалуйста, введите число.");
+   Console.Write("Введите второе число: ");
+  }
 
+   double result = 0;
+
+        
+   switch (operation)
+   {
+     case "+":
+      result = num1 + num2;
+      break;
+     case "-":
+      result = num1 - num2;
+      break;
+     case "*":
+      result = num1 * num2;
+      break;
+     case "/":
+      if (num2 != 0)
+      {
+       result = num1 / num2;
+      }
+        else
+        {
+          Console.WriteLine("Ошибка: деление на ноль невозможно.");
+          Console.ReadKey(); 
+          exit = true;
+          continue; 
+        }
+        break;
         default:
-            Console.WriteLine("Ошибка: неверная операция.");
-            return;
-    }
-    
-    Console.WriteLine($"Результат: {result}");
-    Console.ReadKey();
+          Console.WriteLine("Ошибка: неверная операция.");
+          Console.ReadKey();
+          exit = true;
+          continue; 
+        }
+
+        Console.WriteLine($"Результат: {result}");
+        Console.WriteLine("Нажми любую клавишу для продолжения или введи 'x' для выхода.");
+        if (Console.ReadLine().ToLower() == "x")
+        {
+         exit = true;
+        }
+        else
+        {
+          exit = false;
+        }
+    Console.Clear();
+    } while (!exit);
 }
